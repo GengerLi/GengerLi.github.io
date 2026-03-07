@@ -4,7 +4,6 @@ title: "个人知识网站搭建记录"
 subtitle: "从模板初始化到上线的最小流程"
 author: GengerLi
 categories: [站点建设]
-tags: [Jekyll, GitHub Pages, 知识库]
 banner: "/assets/images/banners/home.jpeg"
 ---
 

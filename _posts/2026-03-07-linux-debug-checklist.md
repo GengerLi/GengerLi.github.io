@@ -4,7 +4,6 @@ title: "Linux 常用排错清单"
 subtitle: "问题定位优先，修复动作最小化"
 author: GengerLi
 categories: [开发实践]
-tags: [Linux, Terminal, Debug]
 banner: "/assets/images/banners/home.jpeg"
 ---
 

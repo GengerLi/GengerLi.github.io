@@ -4,7 +4,6 @@ title: "技术学习闭环实践"
 subtitle: "输入、实验、输出三步法"
 author: GengerLi
 categories: [学习方法]
-tags: [AI, 学习复盘, 知识管理]
 banner: "/assets/images/banners/home.jpeg"
 ---
 
