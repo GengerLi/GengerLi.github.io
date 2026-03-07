@@ -1,5 +1,5 @@
 ---
-short_name: C.S. Rhymes
+short_name: GengerLi
 title: C.S. Rhymes - web dev and author
 name: C.S. Rhymes
 position: Web Designer
@@ -8,7 +8,7 @@ avatar: /img/avatar.png
 website: https://www.csrhymes.com
 facebook: https://www.facebook.com/
 twitter: https://www.twitter.com/chrisrhymes
-github: https://www.github.com/chrisrhymes
+github: https://github.com/GengerLi
 gitlab: https://www.gitlab.com
 instagram: https://www.instagram.com
 linkedin: https://www.linkedin.com/in/chris-rhymes-a6a85971
