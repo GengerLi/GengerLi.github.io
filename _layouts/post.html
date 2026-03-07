@@ -1,42 +1,99 @@
 ---
-layout: default
+layout: framework
+banner:
+banner_html: post-header.html
+hidden: []
+sidebar:
+  - article-menu
 ---
-{% if page.intro %}
-  <div class="intro has-background-light">
-    <div class="columns is-centered">
-      {% if page.intro_image %}
-        <div class="column is-8-desktop is-6-tablet">
-          <figure class="image {% if page.intro_image_ratio %} {{ page.intro_image_ratio }} {% else %} is-16by9 {% endif %}">
-            <img src="{{ page.intro_image | relative_url }}" alt="{{ page.title }}">
-          </figure>
-        </div>
-      {% endif %}
-      <div class="column is-4-desktop is-6-tablet">
-        <p class="title is-1 has-text-dark">{{ page.intro }}</p>
-      </div>
-    </div>
-  </div>
-{% endif %}
 
-<div class="columns is-centered is-multiline">
-  <div class="column is-8-desktop is-10-tablet">
-    <div class="content">
-      <p>
-        <strong>Published: {{ page.date | date: '%b %-d, %Y' }} by {{ page.author }}</strong>
-      </p>
-      {{ content }}
-    </div>
+<div class="post">
+  <section>
 
-    <div class="tags">
-      {% for tag in page.tags %}
-        <span class="tag is-primary">{{ tag }}</span>
-      {% endfor %}
+    {%- assign name = 'banner' -%}
+    {%- include functions.html func='get_value' -%}
+    {%- assign banner = return -%}
+
+    {%- assign name = 'hidden' -%}
+    {%- include functions.html func='get_value' -%}
+    {%- assign hidden = return -%}
+
+    {%- assign result = hidden | where_exp: "item", "item == 'header'" -%}
+    {%- if banner == nil and result.size == 0 -%}
+    {%- include views/post-header.html -%}
+    {%- endif -%}
+
+    {%- include views/article.html -%}
+
+    {%- assign result = hidden | where_exp: "item", "item == 'navigator'" -%}
+    {%- if result.size == 0 -%}
+    <div class="post-nav">
+      {%- if page.previous -%}
+        <a class="previous"
+          href="{{ page.previous.url | relative_url }}"
+          title="{{ page.previous.title | escape }}">
+          <div>{{ page.previous.title | escape }}</div>
+        </a>
+      {%- else -%}
+      <span></span>
+      {%- endif -%}
+
+      {%- if page.next -%}
+        <a class="next"
+          href="{{ page.next.url | relative_url }}"
+          title="{{ page.next.title | escape }}">
+          <div>{{ page.next.title | escape }}</div>
+        </a>
+      {%- else -%}
+      <span></span>
+      {%- endif -%}
     </div>
-  </div>
-  <div class="column is-8-desktop is-10-tablet">
-    {% assign author = site.authors | where: 'name', page.author | first %}
-    {% if author %}
-      {% include author-media.html %}
-    {% endif %}
-  </div>
+    {%- endif -%}
+
+    {%- assign result = hidden | where_exp: "item", "item == 'related_posts'" -%}
+    {%- if result.size == 0 -%}
+    <div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        {% assign posts = site[page.collection] | sample:4 %}
+        {%- for post in posts -%}
+          {%- assign post_item_class = "" -%}
+          {%- if post.top -%}
+            {%- assign post_item_class = "top-post" -%}
+          {%- endif -%}
+        <li class="{{ post_item_class }}">
+          <a class="post-link"
+            href="{{ post.url | relative_url }}"
+            title="{{ post.title | escape }}">
+            {{ post.title | escape | truncatewords: 12 }}
+            {%- include views/post-badges.html -%}
+          </a>
+        </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+    {%- endif -%}
+
+    {%- assign result = hidden | where_exp: "item", "item == 'comments'" -%}
+    {%- if result.size == 0 -%}
+    <div class="post-comments">
+      {%- if page.comments != false -%}
+
+      {%- if site.disqus.shortname -%}
+      {%- include extensions/comments/disqus.html -%}
+      {%- endif -%}
+
+      {%- if site.gitment.username -%}
+      {%- include extensions/comments/gitment.html -%}
+      {%- endif -%}
+
+      {%- if site.utterances.repo -%}
+      {%- include extensions/comments/utterances.html -%}
+      {%- endif -%}
+
+      {%- endif -%}
+    </div>
+    {%- endif -%}
+
+  </section>
 </div>
